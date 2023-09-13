@@ -65,6 +65,7 @@ def pytest_configure(config):
             'tests.generic_relations',
             'tests.importable',
             'tests',
+            'rest_framework',
         ),
         PASSWORD_HASHERS=(
             'django.contrib.auth.hashers.MD5PasswordHasher',
