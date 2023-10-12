@@ -15,25 +15,27 @@
             width: 20%;
             height: 40px;
             border-radius: 30px;
+            border: none;
         }
         .grade-filter{
             width: 20%;
             height: 40px;
             border-radius: 30px;
-
+            border: none;
         }
         .year-filter{
             width: 20%;
-            height: 50px;
+            height: 40px;
             border-radius: 30px;
-
+            border: none;
         }
         .search{
             width: 30%;
             height: 40px;
             border-radius: 30px;
             text-align: center;
-        }
+            border: 2px solid #ddddddff;
+        }   
     }
     .grade-table{
         width: 80%;
