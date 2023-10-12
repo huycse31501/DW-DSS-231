@@ -1,0 +1,30 @@
+[
+    {
+        "STT": 1,
+        "Mã ngành": "A01",
+        "Tên ngành": "Computer Science",
+        "Tổ hợp môn": "Math, Physics, Computer Science",
+        "Điểm chuẩn": 28.5
+    },
+    {
+        "STT": 2,
+        "Mã ngành": "A02",
+        "Tên ngành": "Electrical Engineering",
+        "Tổ hợp môn": "Math, Physics, Chemistry",
+        "Điểm chuẩn": 27.8
+    },
+    {
+        "STT": 3,
+        "Mã ngành": "B01",
+        "Tên ngành": "Business Administration",
+        "Tổ hợp môn": "Math, Literature, Foreign Language",
+        "Điểm chuẩn": 25.6
+    },
+    {
+        "STT": 4,
+        "Mã ngành": "B02",
+        "Tên ngành": "Marketing",
+        "Tổ hợp môn": "Math, Literature, Economics",
+        "Điểm chuẩn": 26.2
+    }
+]

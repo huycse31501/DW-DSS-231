@@ -1,0 +1,50 @@
+.Tracuu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .list-menu{
+        width: 80%;
+        height: 80px;
+        // background-color: aquamarine;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .school-filter{
+            width: 20%;
+            height: 40px;
+            border-radius: 30px;
+        }
+        .grade-filter{
+            width: 20%;
+            height: 40px;
+            border-radius: 30px;
+
+        }
+        .year-filter{
+            width: 20%;
+            height: 50px;
+            border-radius: 30px;
+
+        }
+        .search{
+            width: 30%;
+            height: 40px;
+            border-radius: 30px;
+            text-align: center;
+        }
+    }
+    .grade-table{
+        width: 80%;
+        text-align: left;
+        border: 1px solid black;
+        table,th,td{
+            border: 1px solid black;
+        }
+        th{
+            text-align: center;
+        }
+    }
+    
+}
