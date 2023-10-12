@@ -39,14 +39,21 @@
     }
     .grade-table{
         width: 80%;
-        text-align: left;
+        text-align: center;
         border: 1px solid black;
         table,th,td{
             border: 1px solid black;
         }
+        td,th{
+            padding: 10px;
+        }
         th{
             text-align: center;
         }
+        th{
+            font-weight: normal;
+        }
+        margin-bottom: 30px;
     }
     
 }

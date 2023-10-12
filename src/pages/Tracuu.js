@@ -1,5 +1,6 @@
 import React from 'react';
 import '../scss/pages/Tracuu.scss'
+import data from '../json/diemchuan.json'
 const Tracuu = () => {
     return (
         <div className='Tracuu'>
@@ -24,6 +25,19 @@ const Tracuu = () => {
                     <td>A00; A01; C03; D01</td>
                     <td>21</td>
                 </tr>
+                
+                    {
+                        data.map(item =>(
+                            <tr>
+                                <td>{item.stt}</td>
+                                <td>{item.code}</td>
+                                <td>{item.name}</td>
+                                <td>{item.subject}</td>
+                                <td>{item.grade}</td>
+                            </tr>
+                        ))
+                    }
+                
             </table>
         </div>
     );
