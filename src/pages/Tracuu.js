@@ -17,15 +17,7 @@ const Tracuu = () => {
                     <th>Tên ngành</th>
                     <th>Tổ hợp môn</th>
                     <th>Điểm chuẩn</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>7860100</td>
-                    <td>Nghiệp vụ An ninh</td>
-                    <td>A00; A01; C03; D01</td>
-                    <td>21</td>
-                </tr>
-                
+                </tr> 
                     {
                         data.map(item =>(
                             <tr>
