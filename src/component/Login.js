@@ -17,7 +17,7 @@ const Login = () => {
                     </div>
                     <button>Đăng nhập</button>
                     <div style={{width:'100%',display:'flex',justifyContent:'flex-end'}}>
-                        <p>Bạn chưa có tài khoản ? <span><a style={{color:'blue'}}>Đăng kí ngay ?</a></span></p>
+                        <p>Bạn chưa có tài khoản ? <span><a href='/register' style={{color:'blue'}}>Đăng kí ngay ?</a></span></p>
                     </div>
                 </div>
             </form>
