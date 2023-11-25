@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import '../scss/pages/Tracuu.scss'
 import data from '../json/diemchuan.json'
 import { Pagination } from 'antd';
@@ -9,154 +9,185 @@ const Tracuu = () => {
     const [searchNganh, setSearchNganh] = useState('');
     const [searchDiem, setSearchDiem] = useState('');
     const [searchValue, setSearchValue] = useState('');
-
-    // Tính chỉ số của record đầu tiên và cuối cùng trên từng trang
-    const indexOfLastRecord = currentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-
-    const filteredData = data.filter((item) => {
-        return (
-          item.name.toLowerCase().includes(searchNganh.toLowerCase()) &&
-          item.grade.toString().includes(searchDiem) &&
-          Object.values(item).some(
-            (value) =>
-              typeof value === 'string' &&
-              (value.toLowerCase().includes(searchValue.toLowerCase()) || item.grade?.toString().includes(searchValue))
-
-          )
-        );
-      });
-    const sortedFilteredData = filteredData.sort((a, b) => {
-        const aName = a.name?.toLowerCase();
-        const bName = b.name?.toLowerCase();
-        const aGrade = a.grade?.toString();
-        const bGrade = b.grade?.toString();
-        const aSubject = a.subject?.toLowerCase();
-        const bSubject = b.subject?.toLowerCase();
-        const aType = a.type?.toLowerCase();
-        const bType = b.type?.toLowerCase();
+    const [searchSchool, setSearchSchool] = useState('');
+    const [searchYear, setSearchYear] = useState('');
+    const [sortNameOrder, setSortNameOrder] = useState('default');
+    const [sortGradeOrder, setSortGradeOrder] = useState('default');
+    const [sortYearOrder, setSortYearOrder] = useState('default');
+    const [sortSubjectOrder, setSortSubjectOrder] = useState('default');
+    const [sortBlockOrder, setSortBlockOrder] = useState('default');
+  
+    const [sortedFilteredData, setSortedFilteredData] = useState([...data]);
+  
+    useEffect(() => {
+        const filteredData = data.filter((item) => {
+          return (
+            item.name.toLowerCase().includes(searchSchool.toLowerCase()) &&
+            item.grade.toString().includes(searchDiem) &&
+            item.subject.toLowerCase().includes(searchNganh.toLowerCase()) &&
+            item.year.toString().includes(searchYear.toLowerCase()) &&
+            Object.values(item).some(
+              (value) =>
+                typeof value === 'string' &&
+                (value.toLowerCase().includes(searchValue.toLowerCase()) ||
+                  item.grade?.toString().includes(searchValue) ||
+                  item.year?.toString().includes(searchValue))
+            )
+          );
+        });
     
-        if (
-            aName?.includes(searchValue.toLowerCase()) &&
-            bName?.includes(searchValue.toLowerCase())
-            ) {
-            if (
-                aName.indexOf(searchValue.toLowerCase()) <
-                bName.indexOf(searchValue.toLowerCase())
-            )
-                return -1;
-            if (
-                aName.indexOf(searchValue.toLowerCase()) >
-                bName.indexOf(searchValue.toLowerCase())
-            )
-                return 1;
-        } else if (aName?.includes(searchValue.toLowerCase())) {
-          return -1;
-        } else if (bName?.includes(searchValue.toLowerCase())) {
-          return 1;
-        } else if (
-          aGrade?.includes(searchValue) &&
-          bGrade?.includes(searchValue)
-        ) {
-            if (
-                aGrade.indexOf(searchValue) <
-                bGrade.indexOf(searchValue)
-            )
-            return -1;
-          if (
-            aGrade.indexOf(searchValue) >
-            bGrade.indexOf(searchValue)
-          )
-            return 1;
-        } else if (aGrade?.includes(searchValue)) {
-          return -1;
-        } else if (bGrade?.includes(searchValue)) {
-          return 1;
-        } else if (
-          aSubject?.includes(searchValue.toLowerCase()) &&
-          bSubject?.includes(searchValue.toLowerCase())
-        ) {
-          if (
-            aSubject.indexOf(searchValue.toLowerCase()) <
-            bSubject.indexOf(searchValue.toLowerCase())
-          )
-            return -1;
-          if (
-            aSubject.indexOf(searchValue.toLowerCase()) >
-            bSubject.indexOf(searchValue.toLowerCase())
-          )
-            return 1;
-        } else if (aSubject?.includes(searchValue.toLowerCase())) {
-          return -1;
-        } else if (bSubject?.includes(searchValue.toLowerCase())) {
-          return 1;
-        } else if (
-          aType?.includes(searchValue.toLowerCase()) &&
-          bType?.includes(searchValue.toLowerCase())
-        ) {
-          if (
-            aType.indexOf(searchValue.toLowerCase()) <
-            bType.indexOf(searchValue.toLowerCase())
-          )
-            return -1;
-          if (
-            aType.indexOf(searchValue.toLowerCase()) >
-            bType.indexOf(searchValue.toLowerCase())
-          )
-            return 1;
-        } else if (aType?.includes(searchValue.toLowerCase())) {
-          return -1;
-        } else if (bType?.includes(searchValue.toLowerCase())) {
-          return 1;
+        let sortedData = [...filteredData];
+    
+        // Sắp xếp theo tên trường
+        if (sortNameOrder === 'asc') {
+          sortedData.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortNameOrder === 'desc') {
+          sortedData.sort((a, b) => b.name.localeCompare(a.name));
         }
     
-        return 0;
-      });
-    const currentRecords = filteredData.slice(indexOfFirstRecord, indexOfLastRecord);
+        // Sắp xếp theo điểm
+        if (sortGradeOrder === 'asc') {
+          sortedData.sort((a, b) => a.grade - b.grade);
+        } else if (sortGradeOrder === 'desc') {
+          sortedData.sort((a, b) => b.grade - a.grade);
+        }
+    
+        // Sắp xếp theo năm
+        if (sortYearOrder === 'asc') {
+          sortedData.sort((a, b) => a.year - b.year);
+        } else if (sortYearOrder === 'desc') {
+          sortedData.sort((a, b) => b.year - a.year);
+        }
+    
+        // Sắp xếp theo tên ngành
+        if (sortSubjectOrder === 'asc') {
+          sortedData.sort((a, b) => a.subject.localeCompare(b.subject));
+        } else if (sortSubjectOrder === 'desc') {
+          sortedData.sort((a, b) => b.subject.localeCompare(a.subject));
+        }
+    
+        // Sắp xếp theo tổ hợp môn
+        if (sortBlockOrder === 'asc') {
+          sortedData.sort((a, b) => a.colleged_exam_block.localeCompare(b.colleged_exam_block));
+        } else if (sortBlockOrder === 'desc') {
+          sortedData.sort((a, b) => b.colleged_exam_block.localeCompare(a.colleged_exam_block));
+        }
+    
+        setSortedFilteredData(sortedData);
+      }, [searchSchool, searchDiem, searchNganh, searchYear, searchValue, sortNameOrder, sortGradeOrder, sortYearOrder, sortSubjectOrder, sortBlockOrder]);
+    
+    useEffect(() => {
+      // Mặc định hiển thị toàn bộ dữ liệu khi trang được tải
+      setSortedFilteredData(data);
+    }, []);
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = sortedFilteredData.slice(indexOfFirstRecord, indexOfLastRecord);
     const totalPages = Math.ceil(sortedFilteredData.length / recordsPerPage);
-
-    // Hàm thay đổi trang
+  
     const handlePageChange = (page) => {
-        setCurrentPage(page);
+      setCurrentPage(page);
     };
-
-
+  
+    const handleSearchSchool = (e) => {
+      setSearchSchool(e.target.value);
+      setCurrentPage(1);
+    };
+  
     const handleNganhSearch = (e) => {
-        setSearchNganh(e.target.value);
-        setCurrentPage(1);
+      setSearchNganh(e.target.value);
+      setCurrentPage(1);
     };
-
+  
     const handleDiemSearch = (e) => {
-        setSearchDiem(e.target.value);
-        setCurrentPage(1);
+      setSearchDiem(e.target.value);
+      setCurrentPage(1);
     };
+  
     const handleSearchAll = (e) => {
-        setSearchValue(e.target.value);
-        setCurrentPage(1);
+      setSearchValue(e.target.value);
+      setCurrentPage(1);
+    };
+  
+    const handleSortByName = () => {
+        if (sortNameOrder === 'default') {
+          // Chuyển sang sắp xếp theo A-Z khi nhấn lần đầu
+          setSortNameOrder('asc');
+        } else if (sortNameOrder === 'asc') {
+          // Chuyển sang sắp xếp theo Z-A khi nhấn lần tiếp theo
+          setSortNameOrder('desc');
+        } else {
+          // Trở về trạng thái ban đầu khi nhấn lần nữa
+          setSortNameOrder('default');
+        }
+      };
+      
+      const handleSortByGrade = () => {
+        if (sortGradeOrder === 'default') {
+          setSortGradeOrder('asc');
+        } else if (sortGradeOrder === 'asc') {
+          setSortGradeOrder('desc');
+        } else {
+          setSortGradeOrder('default');
+        }
+      };
+      
+      const handleSortByYear = () => {
+        if (sortYearOrder === 'default') {
+          setSortYearOrder('asc');
+        } else if (sortYearOrder === 'asc') {
+          setSortYearOrder('desc');
+        } else {
+          setSortYearOrder('default');
+        }
+      };
+      
+      // Thêm các hàm sort khác cho tên ngành, tổ hợp môn, điểm chuẩn...
+      
+      const handleSortBySubject = () => {
+        if (sortSubjectOrder === 'default') {
+          setSortSubjectOrder('asc');
+        } else if (sortSubjectOrder === 'asc') {
+          setSortSubjectOrder('desc');
+        } else {
+          setSortSubjectOrder('default');
+        }
+      };
+      
+      const handleSortByExamBlock = () => {
+        if (sortBlockOrder === 'default') {
+            setSortBlockOrder('asc');
+        } else if (sortBlockOrder === 'asc') {
+            setSortBlockOrder('desc');
+        } else {
+            setSortBlockOrder('default');
+        }
       };
     return (
         <div className='Tracuu'>
             <div className='list-menu'>
+                <input className='school-filter' placeholder='Trường' value={searchSchool} onChange={handleSearchSchool}/>
                 <input className='school-filter' placeholder='Ngành' value={searchNganh} onChange={handleNganhSearch}/>
-                <input className='grade-filter' placeholder='Điểm'value={searchDiem} onChange={handleDiemSearch}/>
+                <input className='grade-filter' placeholder='Điểm' value={searchDiem} onChange={handleDiemSearch}/>
                 <div className='dropdown'>
-                    <button className='dropbtn'>Năm</button>
+                    <button className='dropbtn'>{searchYear === ''?'Năm':searchYear}</button>
                     <div className='dropdown-content'>
-                        <a href='#'>2018</a>
-                        <a href='#'>2019</a>
-                        <a href='#'>2020</a>
-                        <a href='#'>2021</a>
-                        <a href='#'>2022</a>
-                        <a href='#'>2023</a>
+                        <button onClick={()=>{setSearchYear(''); setCurrentPage(1);}}>Tất cả</button>
+                        <button onClick={()=>{setSearchYear('2016'); setCurrentPage(1);}}>2016</button>
+                        <button onClick={()=>{setSearchYear('2017'); setCurrentPage(1);}}>2017</button>
+                        <button onClick={()=>{setSearchYear('2018'); setCurrentPage(1);}}>2018</button>
+                        <button onClick={()=>{setSearchYear('2019'); setCurrentPage(1);}}>2019</button>
+                        <button onClick={()=>{setSearchYear('2020'); setCurrentPage(1);}}>2020</button>
+                        <button onClick={()=>{setSearchYear('2021'); setCurrentPage(1);}}>2021</button>
+                        <button onClick={()=>{setSearchYear('2022'); setCurrentPage(1);}}>2022</button>
                     </div>
                 </div>
                 {/* <button className='year-filter'>Năm</button> */}
                 <div className='dropdown'>
                     <button className='dropbtn'>Hệ</button>
                     <div className='dropdown-content'>
-                        <a href='#'>Chính quy - đại trà</a>
-                        <a href='#'>Chất lượng cao</a>
-                        <a href='#'>Việt - Pháp</a>
+                        <button>Đại học</button>
+                        <button>Cao đẳng</button>
                     </div>
                 </div>
 
@@ -166,20 +197,24 @@ const Tracuu = () => {
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Mã ngành</th>
-                        <th>Tên ngành</th>
-                        <th>Tổ hợp môn</th>
-                        <th>Điểm chuẩn</th>
+                        <th onClick={handleSortByName}>Tên trường</th>
+                        <th>Mã trường</th>
+                        <th onClick={handleSortBySubject }>Tên ngành</th>
+                        <th onClick={handleSortByName}>Tổ hợp môn</th>
+                        <th onClick={handleSortByExamBlock}>Điểm chuẩn</th>
+                        <th onClick={handleSortByYear}>Năm</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentRecords.map((item, index) => (
                         <tr key={index}>
                             <td>{index + indexOfFirstRecord + 1}</td>
-                            <td>{item.code}</td>
                             <td>{item.name}</td>
-                            <td>{item.subject}</td>
+                            <td>{item.collegeId}</td>
+                            <td style={{textAlign:'left',paddingLeft:'5%'}}>{item.subject}</td>
+                            <td>{item.colleged_exam_block}</td>
                             <td>{item.grade}</td>
+                            <td>{item.year}</td>
                         </tr>
                     ))}
                 </tbody>

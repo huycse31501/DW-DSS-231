@@ -11,6 +11,7 @@ import Phodiem from './pages/Phodiem';
 import News from './pages/News';
 import NewsList from './pages/NewsList';
 import NewsDetails from './pages/NewsDetails';
+import MyComponent from './json/Mycomponent';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -20,6 +21,8 @@ function App() {
       <Header/>
         <Routes>
           <Route path='home' element={<Home/>}></Route>
+          <Route path='mycomponent' element={<MyComponent/>}></Route>
+
           <Route path='login' element={<Login/>}></Route>
           <Route path='register' element={<Register/>}></Route>
           <Route path='*' element={<About/>}></Route>
