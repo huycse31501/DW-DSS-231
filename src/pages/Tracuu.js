@@ -183,13 +183,13 @@ const Tracuu = () => {
                     </div>
                 </div>
                 {/* <button className='year-filter'>Năm</button> */}
-                <div className='dropdown'>
+                {/* <div className='dropdown'>
                     <button className='dropbtn'>Hệ</button>
                     <div className='dropdown-content'>
                         <button>Đại học</button>
                         <button>Cao đẳng</button>
                     </div>
-                </div>
+                </div> */}
 
                 <input className='search' placeholder='Search' value={searchValue} onChange={handleSearchAll}/>
             </div>

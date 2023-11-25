@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from 'firebase/storage';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword  } from 'firebase/auth';
 
 import firebase from 'firebase/app';
 import { getFirestore, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query, where } from 'firebase/firestore';
@@ -29,4 +30,6 @@ const analytics = getAnalytics(app);
 const firestore = getFirestore(app);
 const storage = getStorage(app);
 
-export  { firestore,storage, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query,where,ref,uploadBytes  };
+const auth = getAuth(app);
+
+export  { signInWithEmailAndPassword ,createUserWithEmailAndPassword,auth,firestore,storage, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query,where,ref,uploadBytes  };

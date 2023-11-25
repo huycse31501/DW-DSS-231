@@ -38,6 +38,7 @@ const Header = () => {
           <a href="/tracuu">Tra cứu điểm chuẩn</a>
           <a href="/phodiem">Phổ điểm</a>
           <a href="/newslist">Tin tức tuyển sinh</a>
+          <a href="/register">Đăng ký</a>
           <a href="/login">Đăng nhập</a>
 
 
