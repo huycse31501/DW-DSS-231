@@ -3,10 +3,10 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from 'firebase/storage';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword  } from 'firebase/auth';
+import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,    } from 'firebase/auth';
 
 import firebase from 'firebase/app';
-import { getFirestore, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query, where } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query, where,updateDoc } from 'firebase/firestore';
 import 'firebase/storage'; 
 import 'firebase/database'; // Đối với Realtime Database
 // TODO: Add SDKs for Firebase products that you want to use
@@ -32,4 +32,4 @@ const storage = getStorage(app);
 
 const auth = getAuth(app);
 
-export  { signInWithEmailAndPassword ,createUserWithEmailAndPassword,auth,firestore,storage, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query,where,ref,uploadBytes  };
+export  { signInWithEmailAndPassword ,createUserWithEmailAndPassword,auth,updateProfile,updateDoc ,firestore,storage, collection, addDoc, onSnapshot, getDocs,doc,getDoc, query,where,ref,uploadBytes  };

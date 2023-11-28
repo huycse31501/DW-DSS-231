@@ -1,6 +1,10 @@
 import React from 'react';
 import '../scss/pages/About.scss'
 import logo from '../images/about.jpg'
+import phuc from '../images/phuc.jpg'
+import huy from '../images/anhHuy.jpg'
+import nhan from '../images/nhan.jpg'
+import phucanh from '../images/phucanh.jpg'
 const About = () => {
     return (
         <div className="About">
@@ -18,29 +22,21 @@ const About = () => {
             <h1 style={{textAlign:'center'}}>Team members</h1>
             <div className='team-members'>
                 <div className='members-infor'>
-                    <div className='avatar'>
-
-                    </div>
+                    <img alt='' className='avatar' src={phuc}/>
                     <h2>Phan Hoàng Phúc</h2>
                 </div>
                 
                 <div className='members-infor'>
-                    <div className='avatar'>
-
-                    </div>
+                    <img alt='' className='avatar' src={huy}/>
                     <h2>Nguyễn Quang Huy</h2>
 
                 </div>
                 <div className='members-infor'>
-                    <div className='avatar'>
-
-                    </div>
+                    <img alt='' className='avatar' src={phucanh}/>
                     <h2>Trần Phúc Anh</h2>
                 </div>
                 <div className='members-infor'>
-                    <div className='avatar'>
-
-                    </div>
+                    <img alt='' className='avatar' src={nhan}/>
                     <h2>Trần Thiện Nhân</h2>
                 </div>
                 

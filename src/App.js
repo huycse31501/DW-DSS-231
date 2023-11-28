@@ -13,6 +13,7 @@ import NewsList from './pages/NewsList';
 import NewsDetails from './pages/NewsDetails';
 import MyComponent from './json/Mycomponent';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path='home' element={<Home/>}></Route>
           <Route path='mycomponent' element={<MyComponent/>}></Route>
+          <Route path='settings' element={<Profile/>}></Route>
 
           <Route path='login' element={<Login/>}></Route>
           <Route path='register' element={<Register/>}></Route>
